@@ -1,4 +1,4 @@
-trial_number,mean_r2,params_colsample_bytree,params_gamma,params_grow_policy,params_learning_rate,params_max_bin,params_max_depth,params_min_child_weight,params_n_estimators,params_reg_alpha,params_reg_lambda,params_subsample,state,best_r2_so_far
+trial_number,mean_r2,colsample_bytree,gamma,grow_policy,learning_rate,max_bin,max_depth,min_child_weight,n_estimators,reg_alpha,reg_lambda,subsample,state,best_r2_so_far
 0,0.99955938,0.57799726,0.290418061,depthwise,0.074416324,501,10,12,1686,0.253781551,21.42302176,0.662407456,COMPLETE,0.99955938
 1,0.999748951,0.762378216,2.159725093,lossguide,0.009778326,269,4,4,3380,0.280163516,0.028585494,0.721696897,COMPLETE,0.999748951
 2,0.999737867,0.523225206,3.03772426,lossguide,0.01044382,439,9,11,1987,0.001820566,0.007122306,0.836965828,COMPLETE,0.999748951
