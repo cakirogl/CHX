@@ -128,7 +128,7 @@ pred_type = st.sidebar.selectbox(
 )
 
 dose_input = st.sidebar.selectbox(
-    "Select Dose (%)",
+    "Select CHX Dose (%)",
     (1, 2, 5, 10)
 )
 
