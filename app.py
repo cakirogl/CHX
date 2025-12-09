@@ -238,7 +238,8 @@ fig, ax = plt.subplots(figsize=(10, 5))
 
 # Plot Interval (Only if q_val exists)
 if q_val is not None:
-    y_lower = np.maximum(0, y_plot - q_val)
+    #y_lower = np.maximum(0, y_plot - q_val)
+    y_lower = y_plot - q_val
     y_upper = y_plot + q_val
     ax.fill_between(t_plot, y_lower, y_upper, color='purple', alpha=0.2, label=f'{int(confidence_level*100)}% Prediction Interval')
 
