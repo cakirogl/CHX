@@ -132,35 +132,11 @@ dose_input = st.sidebar.selectbox(
     (1, 2, 5, 10)
 )
 
-# --- Synchronized Day Input (Slider + Number Box) ---
-if 'day_val' not in st.session_state:
-    st.session_state.day_val = 5.0
-
-def update_slider():
-    st.session_state.day_val = st.session_state.day_slider
-
-def update_num_input():
-    st.session_state.day_val = st.session_state.day_num
-
-st.sidebar.markdown("### Select Day")
-# 1. Slider
-st.sidebar.slider(
-    "Use Slider",
-    min_value=0.0, max_value=663.0, step=1.0,
-    key='day_slider', value=st.session_state.day_val,
-    on_change=update_slider
+# Slider for Day Selection (0 to 663)
+day_input = st.sidebar.slider(
+    "Select Day",
+    min_value=0.0, max_value=663.0, value=5.0, step=1.0
 )
-# 2. Manual Entry
-st.sidebar.number_input(
-    "Enter Manually",
-    min_value=0.0, max_value=663.0, step=1.0,
-    key='day_num', value=st.session_state.day_val,
-    on_change=update_num_input
-)
-
-# Use the synchronized value
-day_input = st.session_state.day_val
-# ----------------------------------------------------
 
 # Only show confidence level selection if we are in Rate mode
 if pred_type == "Daily Release Rate":
@@ -213,7 +189,7 @@ if pred_type == "Daily Release Rate":
     q_val, source_msg = get_rate_quantile(dose_input, confidence_level)
     
     if q_val is not None:
-        # Allow negative lower bounds
+        # UPDATED: Allow negative lower bounds
         lower_bound = pred_point - q_val
         upper_bound = pred_point + q_val
     else:
@@ -263,7 +239,7 @@ fig, ax = plt.subplots(figsize=(10, 5))
 
 # Plot Interval (Only if q_val exists)
 if q_val is not None:
-    # Allow negative lower bounds in plot
+    # UPDATED: Allow negative lower bounds in plot
     y_lower = y_plot - q_val
     y_upper = y_plot + q_val
     ax.fill_between(t_plot, y_lower, y_upper, color='purple', alpha=0.2, label=f'{int(confidence_level*100)}% Prediction Interval')
