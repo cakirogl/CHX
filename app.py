@@ -189,7 +189,8 @@ if pred_type == "Daily Release Rate":
     q_val, source_msg = get_rate_quantile(dose_input, confidence_level)
     
     if q_val is not None:
-        lower_bound = max(0, pred_point - q_val)
+        #lower_bound = max(0, pred_point - q_val)
+        lower_bound = pred_point - q_val
         upper_bound = pred_point + q_val
     else:
         # Fallback if file missing
