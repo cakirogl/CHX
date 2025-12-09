@@ -59,7 +59,7 @@ def load_model(path):
         return payload
         
     except ImportError:
-        # Fallback if dill is missing (though it should be in requirements.txt)
+        # Fallback if dill is missing
         payload = joblib.load(path)
         if isinstance(payload, dict) and "model" in payload:
             return payload["model"]
@@ -132,9 +132,10 @@ dose_input = st.sidebar.selectbox(
     (1, 2, 5, 10)
 )
 
+# UPDATED: Range up to 663, Step 1.0
 day_input = st.sidebar.number_input(
     "Select Day",
-    min_value=0.0, max_value=60.0, value=5.0, step=0.5
+    min_value=0.0, max_value=663.0, value=5.0, step=1.0
 )
 
 # Only show confidence level selection if we are in Rate mode
@@ -224,8 +225,8 @@ else:
 st.markdown("---")
 st.subheader("Prediction Curve")
 
-# Generate curve
-t_plot = np.linspace(0, 40, 300)
+# UPDATED: Generate curve up to 663 days
+t_plot = np.linspace(0, 663, 1000)
 d_plot = np.full_like(t_plot, dose_input)
 X_plot = make_features(t_plot, d_plot)
 y_plot = model.predict(X_plot)
