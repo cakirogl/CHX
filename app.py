@@ -48,9 +48,22 @@ def load_model(path):
         return None
     try:
         import dill
-        return joblib.load(path)
+        # Load the file
+        payload = joblib.load(path)
+        
+        # FIX: Check if it's a dictionary containing the model
+        if isinstance(payload, dict) and "model" in payload:
+            return payload["model"]
+        
+        # Otherwise, assume it's the model itself
+        return payload
+        
     except ImportError:
-        return joblib.load(path)
+        # Fallback if dill is missing (though it should be in requirements.txt)
+        payload = joblib.load(path)
+        if isinstance(payload, dict) and "model" in payload:
+            return payload["model"]
+        return payload
     except Exception as e:
         st.error(f"Error loading model: {e}")
         return None
