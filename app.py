@@ -51,7 +51,7 @@ def load_model(path):
         # Load the file
         payload = joblib.load(path)
         
-        # FIX: Check if it's a dictionary containing the model
+        # Check if it's a dictionary containing the model
         if isinstance(payload, dict) and "model" in payload:
             return payload["model"]
         
@@ -132,8 +132,8 @@ dose_input = st.sidebar.selectbox(
     (1, 2, 5, 10)
 )
 
-# UPDATED: Range up to 663, Step 1.0
-day_input = st.sidebar.number_input(
+# Slider for Day Selection (0 to 663)
+day_input = st.sidebar.slider(
     "Select Day",
     min_value=0.0, max_value=663.0, value=5.0, step=1.0
 )
@@ -189,7 +189,7 @@ if pred_type == "Daily Release Rate":
     q_val, source_msg = get_rate_quantile(dose_input, confidence_level)
     
     if q_val is not None:
-        #lower_bound = max(0, pred_point - q_val)
+        # UPDATED: Allow negative lower bounds
         lower_bound = pred_point - q_val
         upper_bound = pred_point + q_val
     else:
@@ -226,7 +226,7 @@ else:
 st.markdown("---")
 st.subheader("Prediction Curve")
 
-# UPDATED: Generate curve up to 663 days
+# Generate curve up to 663 days
 t_plot = np.linspace(0, 663, 1000)
 d_plot = np.full_like(t_plot, dose_input)
 X_plot = make_features(t_plot, d_plot)
@@ -239,7 +239,7 @@ fig, ax = plt.subplots(figsize=(10, 5))
 
 # Plot Interval (Only if q_val exists)
 if q_val is not None:
-    #y_lower = np.maximum(0, y_plot - q_val)
+    # UPDATED: Allow negative lower bounds in plot
     y_lower = y_plot - q_val
     y_upper = y_plot + q_val
     ax.fill_between(t_plot, y_lower, y_upper, color='purple', alpha=0.2, label=f'{int(confidence_level*100)}% Prediction Interval')
