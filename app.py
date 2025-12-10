@@ -212,7 +212,7 @@ if q_val is not None:
         st.metric(label="Lower Bound", value=f"{lower_bound:.4f} {unit}", delta=f"-{q_val:.4f}")
     with col3:
         st.metric(label="Upper Bound", value=f"{upper_bound:.4f} {unit}", delta=f"+{q_val:.4f}")
-    st.caption(f"Interval Source: {source_msg} | Quantile: {confidence_level}")
+    #st.caption(f"Interval Source: {source_msg} | Quantile: {confidence_level}")
 else:
     col1 = st.columns(1)[0]
     with col1:
