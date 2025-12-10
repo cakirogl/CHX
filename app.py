@@ -10,6 +10,42 @@ import matplotlib.pyplot as plt
 # ==========================================
 st.set_page_config(page_title="CHX Release Predictor", layout="wide")
 
+# --- CUSTOM CSS FOR FONT SIZES ---
+st.markdown(
+    """
+    <style>
+    /* 1. Make the Metric Value (the number) SMALLER */
+    [data-testid="stMetricValue"] {
+        font-size: 24px !important;
+    }
+    
+    /* 2. Make the Metric Label (the text above the number) BIGGER */
+    [data-testid="stMetricLabel"] {
+        font-size: 20px !important;
+        font-weight: 600 !important;
+    }
+
+    /* 3. Make Sidebar Labels (Prediction Settings) BIGGER */
+    [data-testid="stSidebar"] label {
+        font-size: 18px !important;
+        font-weight: 500 !important;
+    }
+    
+    /* Increase size of markdown text in sidebar (like 'Select Day') */
+    [data-testid="stSidebar"] .stMarkdown p {
+        font-size: 18px !important;
+    }
+    
+    /* Optional: Adjust the delta (change) font size if needed */
+    [data-testid="stMetricDelta"] {
+        font-size: 16px !important;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+# ---------------------------------
+
 # URLs for data (used for plotting actual data points)
 URL_CUMULATIVE = "https://raw.githubusercontent.com/cakirogl/CHX/main/CHX_elution_cumulative_all_doses.csv"
 URL_RATE = "https://raw.githubusercontent.com/cakirogl/CHX/main/chx_all_doses_rate.csv"
@@ -189,7 +225,7 @@ if pred_type == "Daily Release Rate":
     q_val, source_msg = get_rate_quantile(dose_input, confidence_level)
     
     if q_val is not None:
-        # UPDATED: Allow negative lower bounds
+        # Allow negative lower bounds
         lower_bound = pred_point - q_val
         upper_bound = pred_point + q_val
     else:
@@ -212,7 +248,7 @@ if q_val is not None:
         st.metric(label="Lower Bound", value=f"{lower_bound:.4f} {unit}", delta=f"-{q_val:.4f}")
     with col3:
         st.metric(label="Upper Bound", value=f"{upper_bound:.4f} {unit}", delta=f"+{q_val:.4f}")
-    #st.caption(f"Interval Source: {source_msg} | Quantile: {confidence_level}")
+    # st.caption(f"Interval Source: {source_msg} | Quantile: {confidence_level}")
 else:
     col1 = st.columns(1)[0]
     with col1:
@@ -239,7 +275,7 @@ fig, ax = plt.subplots(figsize=(10, 5))
 
 # Plot Interval (Only if q_val exists)
 if q_val is not None:
-    # UPDATED: Allow negative lower bounds in plot
+    # Allow negative lower bounds in plot
     y_lower = y_plot - q_val
     y_upper = y_plot + q_val
     ax.fill_between(t_plot, y_lower, y_upper, color='purple', alpha=0.2, label=f'{int(confidence_level*100)}% Prediction Interval')
