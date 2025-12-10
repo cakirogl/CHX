@@ -14,32 +14,44 @@ st.set_page_config(page_title="CHX Release Predictor", layout="wide")
 st.markdown(
     """
     <style>
-    /* 1. Make the Metric Value (the number) SMALLER */
+    /* 1. Main Panel: Make the Metric Value (the number) SMALLER */
     [data-testid="stMetricValue"] {
         font-size: 24px !important;
     }
     
-    /* 2. Make the Metric Label (the text above the number) BIGGER */
+    /* 2. Main Panel: Make the Metric Label (the text above the number) BIGGER */
     [data-testid="stMetricLabel"] {
         font-size: 20px !important;
         font-weight: 600 !important;
     }
 
-    /* 3. Make Sidebar Labels (Prediction Settings) BIGGER */
+    /* --- SIDEBAR STYLING --- */
+    
+    /* 3. Sidebar Widget Labels (e.g., "Select Prediction Target") */
     [data-testid="stSidebar"] label {
-        font-size: 18px !important;
-        font-weight: 500 !important;
+        font-size: 24px !important;
+        font-weight: 700 !important;
     }
     
-    /* Increase size of markdown text in sidebar (like 'Select Day') */
+    /* 4. Sidebar Dropdown/Input Text (The selected values) */
+    [data-testid="stSidebar"] div[data-baseweb="select"] > div,
+    [data-testid="stSidebar"] input {
+        font-size: 20px !important;
+    }
+    
+    /* 5. Sidebar Markdown Text (e.g., "Select Day" header above slider) */
     [data-testid="stSidebar"] .stMarkdown p {
+        font-size: 24px !important;
+        font-weight: 700 !important;
+    }
+    
+    /* 6. Sidebar Slider Text (min/max/current values) */
+    [data-testid="stSidebar"] [data-testid="stSliderTickBarMin"],
+    [data-testid="stSidebar"] [data-testid="stSliderTickBarMax"],
+    [data-testid="stSidebar"] [data-testid="stThumbValue"] {
         font-size: 18px !important;
     }
     
-    /* Optional: Adjust the delta (change) font size if needed */
-    [data-testid="stMetricDelta"] {
-        font-size: 16px !important;
-    }
     </style>
     """,
     unsafe_allow_html=True,
