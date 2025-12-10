@@ -16,12 +16,12 @@ st.markdown(
     <style>
     /* 1. Main Panel: Make the Metric Value (the number) SMALLER */
     [data-testid="stMetricValue"] {
-        font-size: 24px !important;
+        font-size: 20px !important;
     }
     
     /* 2. Main Panel: Make the Metric Label (the text above the number) BIGGER */
     [data-testid="stMetricLabel"] {
-        font-size: 24px !important;
+        font-size: 20px !important;
         font-weight: 600 !important;
     }
 
@@ -29,19 +29,19 @@ st.markdown(
     
     /* 3. Sidebar Widget Labels (e.g., "Select Prediction Target") */
     [data-testid="stSidebar"] label {
-        font-size: 24px !important;
+        font-size: 20px !important;
         font-weight: 700 !important;
     }
     
     /* 4. Sidebar Dropdown/Input Text (The selected values) */
     [data-testid="stSidebar"] div[data-baseweb="select"] > div,
     [data-testid="stSidebar"] input {
-        font-size: 24px !important;
+        font-size: 20px !important;
     }
     
     /* 5. Sidebar Markdown Text (e.g., "Select Day" header above slider) */
     [data-testid="stSidebar"] .stMarkdown p {
-        font-size: 24px !important;
+        font-size: 20px !important;
         font-weight: 700 !important;
     }
     
@@ -49,7 +49,7 @@ st.markdown(
     [data-testid="stSidebar"] [data-testid="stSliderTickBarMin"],
     [data-testid="stSidebar"] [data-testid="stSliderTickBarMax"],
     [data-testid="stSidebar"] [data-testid="stThumbValue"] {
-        font-size: 24px !important;
+        font-size: 20px !important;
     }
     
     </style>
